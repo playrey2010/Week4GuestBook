@@ -21,7 +21,7 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/newRSVP}">Submit RSVP</a>
             </li>
-            <li sec:authorize="hasAnyRole('USER', 'ADMIN')" class="nav-item">
+            <li class="nav-item" sec:authorize="isAuthenticated()">
                 <form id="logout" th:action="@{/logout}" method="post">
                 <a class="nav-link" href="javascript:{}" onclick="document.getElementById('logout').submit();">Logout</a>
                 </form>
@@ -39,6 +39,10 @@
                 <h5 class="card-title">Accepted invitation!</h5>
                 <p class="card-text" th:text="${post.message}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <h6 class="card-text text-right" th:text="${post.date}">2020-04-28</h6>
+                <div sec:authorize="isAuthenticated()" class="text-center">
+                    <a th:if="${user.id == post.user.id}" th:href="@{/deleteRSVP/{id}(id=${post.id})}" class="btn btn-outline-warning">Delete</a> &nbsp;
+                    <a th:if="${user.id == post.user.id}" th:href="@{/updateRSVP/{id}(id=${post.id})}" class="btn btn-outline-warning">Update</a>
+                </div>
             </div>
         </div>
     </div>
@@ -49,6 +53,10 @@
                 <h5 class="card-title">Rejected invitation!</h5>
                 <p class="card-text" th:text="${post.message}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <h6 class="card-text text-right" th:text="${post.date}">2020-04-28</h6>
+                <div sec:authorize="isAuthenticated()" class="text-center">
+                    <a th:if="${user.id == post.user.id}" th:href="@{/deleteRSVP/{id}(id=${post.id})}" class="btn btn-outline-warning">Delete</a> &nbsp;
+                    <a th:if="${user.id == post.user.id}" th:href="@{/updateRSVP/{id}(id=${post.id})}" class="btn btn-outline-warning">Update</a>
+                </div>
             </div>
         </div>
     </div>

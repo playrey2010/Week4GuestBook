@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "user_table")
@@ -38,6 +39,9 @@ public class User {
 
     @Column(name = "enabled")
     private boolean enabled;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
 
     public User(){
 
@@ -118,5 +122,13 @@ public class User {
 
     public void clearPassword(){
         this.password = "";
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

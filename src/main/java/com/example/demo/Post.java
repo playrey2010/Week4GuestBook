@@ -2,10 +2,7 @@ package com.example.demo;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -20,6 +17,10 @@ public class Post {
     private String message;
 
     private boolean attending;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public long getId() {
         return id;
@@ -51,5 +52,13 @@ public class Post {
 
     public void setAttending(boolean attending) {
         this.attending = attending;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

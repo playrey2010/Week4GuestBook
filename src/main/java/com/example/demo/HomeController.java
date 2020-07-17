@@ -21,11 +21,6 @@ public class HomeController {
     @Autowired
     RoleRepository roleRepository;
 
-    @RequestMapping("/")
-    public String index(){
-        return "index";
-    }
-
     @RequestMapping("/login")
     public String login(){
         return "login";
@@ -72,7 +67,7 @@ public class HomeController {
             Role role = new Role(user.getUsername(), "ROLE_USER");
             roleRepository.save(role);
         }
-        return "index";
+        return "redirect:/";
     }
 
 }

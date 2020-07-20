@@ -9,16 +9,27 @@
 </head>
 <body style="background-color: #eee;">
 <nav th:replace="index :: navbar"></nav>
-<form th:action="@{/processRSVP}" th:object="${post}" method="post">
-    <input type="hidden" th:field="*{id}">
-    Date: <input type="date" th:field="*{date}"> <br>
-    Message: <input type="text" th:field="*{message}"> <br>
-    Attending: <br>
-    <input type="radio" th:field="*{attending}" id="yes" value="true">
-    <label for="yes">Yes</label>
-    <input type="radio" th:field="*{attending}" id="no" value="false">
-    <label for="no">No</label> <br>
-    <input type="submit" value="Submit">
+<form class="w-auto" th:action="@{/processRSVP}" th:object="${post}" method="post">
+
+    <div class="card bg-light mb-3 mt-3 mx-auto" style="max-width: 18rem;">
+        <div class="card-header text-center">RSVP Form</div>
+        <div class="card-body">
+            <input type="hidden" th:field="*{id}">
+            <p class="card-text">Date</p>
+            <input type="date" th:field="*{date}"> <br><br>
+            <p class="card-text">Message:</p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" th:field="*{message}"> <br>
+            </div>
+            <p class="card-text">Attending:</p>
+
+            <div class="text-center"><input type="radio" th:field="*{attending}" id="yes" value="true">
+                <label for="yes">Yes</label>
+                <input type="radio" th:field="*{attending}" id="no" value="false">
+                <label for="no">No</label> <br></div>
+            <input type="submit" value="Submit">
+        </div>
+    </div>
 
 
 </form>

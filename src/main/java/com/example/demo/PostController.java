@@ -19,6 +19,8 @@ public class PostController {
 
     @RequestMapping("/")
     public String index(Model model, Principal principal){
+
+        // passing user information so user id match post-user id
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!authentication.getPrincipal().toString().equals("anonymousUser")){
@@ -27,6 +29,11 @@ public class PostController {
         }
         model.addAttribute("posts", postRepository.findAll());
         return "index";
+    }
+
+    @RequestMapping("/test")
+    public String testingPage(Model model){
+        return "test";
     }
 
     @GetMapping("/newRSVP")

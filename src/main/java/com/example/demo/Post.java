@@ -18,6 +18,8 @@ public class Post {
 
     private boolean attending;
 
+    private String rsvp;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -60,5 +62,13 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getRsvp() {
+        return rsvp;
+    }
+
+    public void setRsvp(String rsvp) {
+        this.rsvp = rsvp;
     }
 }

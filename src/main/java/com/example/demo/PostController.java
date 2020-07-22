@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDate;
 
 @Controller
 public class PostController {
@@ -34,6 +35,36 @@ public class PostController {
     @RequestMapping("/test")
     public String testingPage(Model model){
         return "test";
+    }
+
+    @GetMapping("/accept")
+    public String acceptRsvp(Model model){
+        LocalDate date = LocalDate.now();
+        Post post = new Post();
+        post.setRsvp("Going");
+        post.setDate(date);
+        model.addAttribute("post", post);
+        return "postform";
+    }
+
+    @GetMapping("/maybe")
+    public String maybeRsvp(Model model){
+        LocalDate date = LocalDate.now();
+        Post post = new Post();
+        post.setRsvp("Maybe");
+        post.setDate(date);
+        model.addAttribute("post", post);
+        return "postform";
+    }
+
+    @GetMapping("/sorry")
+    public String sorryRsvp(Model model){
+        LocalDate date = LocalDate.now();
+        Post post = new Post();
+        post.setRsvp("Sorry");
+        post.setDate(date);
+        model.addAttribute("post", post);
+        return "postform";
     }
 
     @GetMapping("/newRSVP")

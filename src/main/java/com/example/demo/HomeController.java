@@ -31,6 +31,16 @@ public class HomeController {
         return "login";
     }
 
+    @PostMapping("/success")
+    public String testLogin(Principal principal, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getPrincipal().toString().equals("anonymousUser")){
+            String username = principal.getName();
+            model.addAttribute("user", userRepository.findByUsername(username));
+        }
+        return "success";
+    }
+
     @PostMapping("/logout")
     public String logout() {
         return "redirect:/login?logout=true";

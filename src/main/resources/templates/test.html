@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-
+    <link rel="apple-touch-icon" th:href="@{/favicon/apple-touch-icon.png}" sizes="180x180" >
+    <link rel="icon" th:href="@{/favicon/favicon32x32.png}" type="image/png" sizes="32x32" >
+    <link rel="icon" th:href="@{/favicon/favicon-16x16.png}" type="image/png" sizes="16x16">
+    <link rel="manifest" th:href="@{/favicon/site.webmanifest}">
     <title>Birthday Homepage</title>
 </head>
 <style>
@@ -15,7 +18,7 @@
     }
 
     #banner{
-        font-size: 12.5rem;
+        font-size: 10vw;
         font-family: 'Anton', sans-serif;
         color: #c2046c;
     }
@@ -26,16 +29,98 @@
         vertical-align: middle;
         font-size: 1.25rem;
         font-weight: bolder;
+        padding-inline-start: 0;
     }
 
     li#rsvp-below {
         font-size: 2rem;
     }
+
+    .btn-lg {
+        font-size: 3.5rem;
+    }
+
+    #attending-button {
+        display: inline-block;
+        /*for responsive font use 4vw*/
+        font-size: 4vw;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+    }
+
+    #attending-button:hover {background-color: #3e8e41}
+
+    #attending-button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666666;
+        transform: translateY(4px);
+    }
+
+    #maybe-button {
+        display: inline-block;
+        /*for responsive font use 4vw*/
+        font-size: 4vw;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #ffc107;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+    }
+
+    #maybe-button:hover{
+        background-color: #e0a800;
+    }
+
+    #maybe-button:active {
+        background-color: #e0a800;
+        box-shadow: 0 5px #666666;
+        transform: translateY(4px);
+    }
+
+    #sorry-button {
+        display: inline-block;
+        /*for responsive font use 4vw*/
+        font-size: 4vw;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #c82333;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+    }
+
+    #sorry-button:hover{
+        background-color: #bd2130;
+    }
+
+    #sorry-button:active {
+        background-color: #bd2130;
+        box-shadow: 0 5px #666666;
+        transform: translateY(4px);
+    }
+
+    .button:focus {
+        outline: none;
+    }
 </style>
 <body>
-<p id="banner" class="text-center p-3">REY'S 28<sup>TH</sup> BIRTHDAY</p>
+<h1 id="banner" class="text-center p-3">REY'S 28<sup>TH</sup> BIRTHDAY</h1>
 <div class="container">
-    <div class="row">
+    <div class="row my-5">
         <div class="col-12 text-center">
             <ul id="event-details">
                 <li class="mb-3">PLACE: ZOOM MEETING</li>
@@ -45,7 +130,25 @@
             </ul>
         </div>
     </div>
+    <div class="row my-5">
+        <div class="col-md text-center mb-3">
+            <a th:href="@{/accept}">
+                <button id="attending-button" class="button p-3">Going</button>
+            </a>
+        </div>
+        <div class="col-md text-center mb-3">
+            <a th:href="@{/maybe}">
+                <button id="maybe-button" class="button p-3">Maybe</button>
+            </a>
+        </div>
+        <div class="col-md text-center mb-3">
+            <a th:href="@{/sorry}">
+                <button id="sorry-button" class="button p-3">Sorry</button>
+            </a>
+        </div>
+    </div>
 </div>
+
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

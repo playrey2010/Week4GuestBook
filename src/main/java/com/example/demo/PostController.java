@@ -33,7 +33,15 @@ public class PostController {
     }
 
     @RequestMapping("/test")
-    public String testingPage(Model model){
+    public String testingPage(Model model, Principal principal){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getPrincipal().toString().equals("anonymousUser")){
+            String username = principal.getName();
+            User user = userRepository.findByUsername(username);
+            if (!user.getPosts().isEmpty()){
+                return "redirect:/";
+            }
+        }
         return "test";
     }
 
@@ -85,7 +93,7 @@ public class PostController {
     @RequestMapping("/updateRSVP/{id}")
     public String updateRsvp(@PathVariable("id") long id, Model model){
         model.addAttribute("post", postRepository.findById(id).get());
-        return "rsvpform";
+        return "postform";
     }
 
     @RequestMapping("/deleteRSVP/{id}")

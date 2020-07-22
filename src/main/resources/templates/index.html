@@ -32,7 +32,7 @@
 <h2 class="text-center">Guest Book</h2>
 <h4 class="text-center" th:unless="${posts.size()} != 0">No RSVPs found!</h4>
 <div th:if="${posts.size()} != 0" th:each="post : ${posts}">
-    <div th:if="${post.attending}" class="w-auto p-3 m-3" >
+    <div th:if="${post.rsvp} == 'Going'" class="w-auto p-3 m-3" >
         <div class="card text-white bg-success mb-3 mx-auto" style="max-width: 18rem;">
             <div class="card-header text-center">M & J's Wedding</div>
             <div class="card-body">
@@ -46,11 +46,26 @@
             </div>
         </div>
     </div>
-    <div th:unless="${post.attending}" class="w-auto p-3 m-3" >
+    <div th:if="${post.rsvp} == 'Sorry'" class="w-auto p-3 m-3" >
         <div class="card text-white bg-danger mb-3 mx-auto" style="max-width: 18rem;">
             <div class="card-header text-center">M & J's Wedding</div>
             <div class="card-body">
                 <h5 class="card-title">Rejected invitation!</h5>
+                <p class="card-text" th:text="${post.message}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h6 class="card-text text-right" th:text="${post.date}">2020-04-28</h6>
+                <div sec:authorize="isAuthenticated()" class="text-center">
+                    <a th:if="${user.id == post.user.id}" th:href="@{/deleteRSVP/{id}(id=${post.id})}" class="btn btn-outline-warning">Delete</a> &nbsp;
+                    <a th:if="${user.id == post.user.id}" th:href="@{/updateRSVP/{id}(id=${post.id})}" class="btn btn-outline-warning">Update</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${post.rsvp} == 'Maybe'" class="w-auto p-3 m-3" >
+        <div class="card mb-3 mx-auto" style="max-width: 18rem; background-color: yellow; color: black">
+            <div class="card-header text-center">M & J's Wedding</div>
+            <div class="card-body">
+                <h5 class="card-title">Pending invitation!</h5>
                 <p class="card-text" th:text="${post.message}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <h6 class="card-text text-right" th:text="${post.date}">2020-04-28</h6>
                 <div sec:authorize="isAuthenticated()" class="text-center">

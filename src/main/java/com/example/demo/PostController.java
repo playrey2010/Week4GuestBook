@@ -46,7 +46,15 @@ public class PostController {
     }
 
     @GetMapping("/accept")
-    public String acceptRsvp(Model model){
+    public String acceptRsvp(Model model, Principal principal){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getPrincipal().toString().equals("anonymousUser")){
+            String username = principal.getName();
+            User user = userRepository.findByUsername(username);
+            if (!user.getPosts().isEmpty()){
+                return "redirect:/";
+            }
+        }
         LocalDate date = LocalDate.now();
         Post post = new Post();
         post.setRsvp("Going");
@@ -56,7 +64,15 @@ public class PostController {
     }
 
     @GetMapping("/maybe")
-    public String maybeRsvp(Model model){
+    public String maybeRsvp(Model model, Principal principal){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getPrincipal().toString().equals("anonymousUser")){
+            String username = principal.getName();
+            User user = userRepository.findByUsername(username);
+            if (!user.getPosts().isEmpty()){
+                return "redirect:/";
+            }
+        }
         LocalDate date = LocalDate.now();
         Post post = new Post();
         post.setRsvp("Maybe");
@@ -66,7 +82,15 @@ public class PostController {
     }
 
     @GetMapping("/sorry")
-    public String sorryRsvp(Model model){
+    public String sorryRsvp(Model model, Principal principal){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getPrincipal().toString().equals("anonymousUser")){
+            String username = principal.getName();
+            User user = userRepository.findByUsername(username);
+            if (!user.getPosts().isEmpty()){
+                return "redirect:/";
+            }
+        }
         LocalDate date = LocalDate.now();
         Post post = new Post();
         post.setRsvp("Sorry");

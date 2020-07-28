@@ -139,4 +139,19 @@ public class PostController {
         return "redirect:/";
     }
 
+    @RequestMapping("/RsvpList")
+    public String rsvpList(Model model, Principal principal){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)){
+            String username = principal.getName();
+            User user = userRepository.findByUsername(username);
+            model.addAttribute("user", user);
+        } else {
+            return "redirect:/test";
+        }
+
+        model.addAttribute("posts", postRepository.findAll());
+        return "allRSVPs";
+    }
+
 }

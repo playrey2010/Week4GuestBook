@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" th:href="@{/favicon/apple-touch-icon.png}" sizes="180x180" >
+    <link rel="icon" th:href="@{/favicon/favicon32x32.png}" type="image/png" sizes="32x32" >
+    <link rel="icon" th:href="@{/favicon/favicon-16x16.png}" type="image/png" sizes="16x16">
+    <link rel="manifest" th:href="@{/favicon/site.webmanifest}">
+    <title>Thank you</title>
+    <style>
+        body {
+            background-color: rgba(63, 241, 226, 0.96);
+        }
+
+        #banner{
+            font-size: 10vw;
+            font-family: 'Anton', sans-serif;
+            color: #c2046c;
+            animation: color-change 1s 5;
+
+        }
+
+        #circle-bottom-right {
+            width: 20%;
+            background-color: #c2046c;
+            content: "";
+            position: fixed;
+            right: -175px;
+            bottom: -100px;
+            height: 33%;
+            border-radius: 100% 0% 0% 0%;
+            transition: 2s;
+        }
+
+
+        #circle-bottom-right:hover {
+            right: 0px;
+            bottom: 0px;
+        }
+
+        p {
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        #circle-bottom-right-who {
+            position: relative;
+            top: 50%;
+            left: 30%;
+            color: white;
+            font-size: 3.0em;
+        }
+
+        #post-message q {
+            font-style: italic;
+            quotes: "\201C""\201D""\2018""\2019";
+            line-height: 1.4;
+            white-space: pre-line;
+            text-align: left !important;
+            font-size: 1.75rem;
+            color: #096b72;
+            display: inherit;
+        }
+
+        #post-message q::before{
+            content: open-quote;
+            display: inline;
+            height: 0;
+            line-height: 0;
+            left: -10px;
+            position: relative;
+            top: 30px;
+            color: #c2046c;
+            font-size: 3em;
+
+         }
+
+        #post-message q::after {
+            content: close-quote;
+            display: inline;
+            height: 0;
+            line-height: 0;
+            left: 10px;
+            position: relative;
+            top: 35px;
+            color: #c2046c;
+            font-size: 3em;
+        }
+
+        #by-whom {
+            text-align: right !important;
+            font-size: 2.9rem;
+            display: inherit;
+            padding-right: 1em;
+        }
+
+        .update-wrap {
+            position: relative;
+        }
+
+        #update-hov {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(29, 106, 154, 0.72);
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .2s, visibility .2s;
+        }
+
+        .update-wrap:hover #update-hov {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<p id="banner" class="text-center p-3">Thank you [[${user.username}]]!</p>
+<div class="container">
+    <div class="row">
+        <div th:switch="${post.rsvp}" class="col-12 text-center">
+            <p th:case="Going">We will tell Rey you are going!</p>
+            <p th:case="Maybe">Your RSVP is pending!</p>
+            <p th:case="Sorry">We will tell Rey you are sorry!</p>
+            <h1>YOUR RSVP:</h1>
+            <blockquote id="post-message" th:inline="text">
+                <div class="update-wrap">
+                    <q>[[${post.message}]]</q>
+                    <p id="update-hov">Update</p>
+                </div>
+                <footer id="by-whom">-[[${user.username}]]</footer>
+            </blockquote>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <form id="logout" th:action="@{/logout}" method="post">
+                <a class="btn btn-danger" href="javascript:{}" onclick="document.getElementById('logout').submit();">Logout</a>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="circle-bottom-right">
+    <h2 id="circle-bottom-right-who">See who's going!</h2>
+</div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>

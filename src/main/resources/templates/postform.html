@@ -5,7 +5,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Your RSVP</title>
+    <title>RSVP</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" th:href="@{/favicon/apple-touch-icon.png}" sizes="180x180" >
@@ -22,39 +22,59 @@
             font-family: 'Anton', sans-serif;
             color: #c2046c;
         }
+
+        /*#maybebtn {*/
+        /*    color: #fff;*/
+        /*    background-color: #ffc107;*/
+        /*}*/
+
+        /*#maybebtn:hover {*/
+        /*    background-color: #e0a800;*/
+        /*}*/
+
+        /*#maybebtn:active {*/
+        /*    background-color: #e0a800;*/
+        /*}*/
+
+
     </style>
 </head>
 <body>
-<h1 id="banner" class="text-center p-3">Your RSVP</h1>
+<h1 id="banner" class="text-center p-3">RSVP</h1>
 
 <div class="container">
     <div class="row">
         <div class="col" >
             <form th:action="@{/processRSVP}" th:object="${post}" method="post">
-                <div class="card bg-light mb-3 mt-3 mx-auto" style="max-width: 18rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <div class="card bg-light mb-3 mt-3 mx-auto" style="max-width: 22rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                     <div class="card-header text-center">RSVP Form</div>
                     <div class="card-body">
                         <input type="hidden" th:field="*{id}">
                         <div class="text-center">
-                            <p class="card-text">Date</p>
-                            <input type="date" th:field="*{date}">
+                            <input type="hidden" th:field="*{date}">
+                            <p class="card-text">RSVP</p>
+                            <div class="btn-group btn-group-toggle text-center mb-3" data-toggle="buttons" style="display: flex">
 
-                            <br><br>
+                                <label class="btn btn-success" for="going">
+                                    <input type="radio" th:field="*{rsvp}" id="going" value="Going">
+                                    Yes</label>
+
+                                <label class="btn btn-warning" for="maybe">
+                                    <input type="radio" th:field="*{rsvp}" id="maybe" value="Maybe">
+                                    Maybe</label>
+
+                                <label class="btn btn-danger" for="sorry">
+                                    <input type="radio" th:field="*{rsvp}" id="sorry" value="Sorry">
+                                    No</label>
+                            </div>
+                            <br>
                             <p class="card-text">Message</p>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" th:field="*{message}"> <br>
+                                <textarea style="resize: none" class="form-control" rows="5" cols="20" th:field="*{message}" maxlength="255"></textarea>
                             </div>
-                            <p class="card-text">Attending:</p>
                         </div>
-                        <div class="text-center">
-                            <input type="radio" th:field="*{rsvp}" id="going" value="Going">
-                            <label for="going">Yes</label>
-                            <input type="radio" th:field="*{rsvp}" id="maybe" value="Maybe">
-                            <label for="maybe">Maybe</label>
-                            <input type="radio" th:field="*{rsvp}" id="sorry" value="Sorry">
-                            <label for="sorry">No</label> <br>
-                            <input type="submit" value="Submit">
-                        </div>
+
+                        <input class="btn btn-secondary btn-lg btn-block" type="submit" value="Submit">
 
                     </div>
                 </div>

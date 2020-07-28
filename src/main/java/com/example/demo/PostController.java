@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class PostController {
     PostRepository postRepository;
 
     @RequestMapping("/")
-    public String index(Model model, Principal principal){
+    public String index(Model model, Principal principal, @ModelAttribute("post") Post post){
 
         // passing user information so user id match post-user id
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -48,7 +49,7 @@ public class PostController {
     @GetMapping("/accept")
     public String acceptRsvp(Model model, Principal principal){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!authentication.getPrincipal().toString().equals("anonymousUser")){
+        if (!(authentication instanceof AnonymousAuthenticationToken)){
             String username = principal.getName();
             User user = userRepository.findByUsername(username);
             if (!user.getPosts().isEmpty()){
@@ -66,7 +67,7 @@ public class PostController {
     @GetMapping("/maybe")
     public String maybeRsvp(Model model, Principal principal){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!authentication.getPrincipal().toString().equals("anonymousUser")){
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
             String username = principal.getName();
             User user = userRepository.findByUsername(username);
             if (!user.getPosts().isEmpty()){
@@ -111,7 +112,19 @@ public class PostController {
         User user = userRepository.findByUsername(username);
         post.setUser(user);
         postRepository.save(post);
-        return "redirect:/";
+        return "redirect:/thankYou";
+    }
+
+    @RequestMapping("/thankYou")
+    public String thankYou(Principal principal, Model model){
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username);
+        if (user.getPosts().isEmpty()){
+            return "redirect:/test";
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("post", postRepository.findByUser(user));
+        return "thankyou";
     }
 
     @RequestMapping("/updateRSVP/{id}")

@@ -164,7 +164,7 @@
                     <p class="update-hov"><a class="update-link" th:href="@{/updateRSVP/{id}(id=${post.id})}">Update</a></p>
                 </div>
                 <q th:unless="${user.id == post.user.id}">[[${post.message}]]</q>
-                <footer class="by-whom">-[[${post.user.username}]]</footer>
+                <footer class="by-whom">-[[${post.user.firstName}]]</footer>
             </blockquote>
         </div>
 

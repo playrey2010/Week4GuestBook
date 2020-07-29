@@ -16,8 +16,6 @@ public class Post {
 
     private String message;
 
-    private boolean attending;
-
     private String rsvp;
 
     @ManyToOne
@@ -46,14 +44,6 @@ public class Post {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public boolean isAttending() {
-        return attending;
-    }
-
-    public void setAttending(boolean attending) {
-        this.attending = attending;
     }
 
     public User getUser() {

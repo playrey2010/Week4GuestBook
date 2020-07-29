@@ -86,11 +86,6 @@ public class PostController {
         return "postform";
     }
 
-    @GetMapping("/newRSVP")
-    public String newRsvpMessage(Model model){
-        model.addAttribute("post", new Post());
-        return "rsvpform";
-    }
 
     @PostMapping("/processRSVP")
     public String processRsvp(@ModelAttribute Post post, Principal principal){

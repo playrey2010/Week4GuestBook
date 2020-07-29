@@ -12,6 +12,7 @@
     <link rel="icon" th:href="@{/favicon/favicon32x32.png}" type="image/png" sizes="32x32" >
     <link rel="icon" th:href="@{/favicon/favicon-16x16.png}" type="image/png" sizes="16x16">
     <link rel="manifest" th:href="@{/favicon/site.webmanifest}">
+    <script src="https://kit.fontawesome.com/ee449a916d.js" crossorigin="anonymous"></script>
     <style>
 
         :root {
@@ -35,6 +36,48 @@
 
         #password-error-message {
             color: var(--error-message);
+        }
+
+
+        #homepage-list{
+            text-decoration: none;
+            color: black;
+        }
+
+        .fa-arrow-left {
+            color: #c2046c;
+            font-size: 1em;
+            font-weight: 700;
+            animation: slideleft 1s ease-in-out infinite;
+        }
+
+        .fa-arrow-right {
+            color: #c2046c;
+            font-size: 1em;
+            font-weight: 700;
+            animation: slideright 1s ease-in-out infinite;
+        }
+
+        @keyframes slideleft {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50%{
+                transform: translate(10px, 0);
+            }
+        }
+
+        @keyframes slideright {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50%{
+                transform: translate(-10px, 0);
+            }
         }
     </style>
 </head>
@@ -70,6 +113,15 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <p>
+                <i class="fas fa-arrow-right"></i>
+                <a id="homepage-list" th:href="@{/}">Back to homepage</a>
+                <i class="fas fa-arrow-left"></i>
+            </p>
         </div>
     </div>
 </div>

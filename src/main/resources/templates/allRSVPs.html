@@ -10,6 +10,7 @@
     <link rel="icon" th:href="@{/favicon/favicon32x32.png}" type="image/png" sizes="32x32" >
     <link rel="icon" th:href="@{/favicon/favicon-16x16.png}" type="image/png" sizes="16x16">
     <link rel="manifest" th:href="@{/favicon/site.webmanifest}">
+    <script src="https://kit.fontawesome.com/ee449a916d.js" crossorigin="anonymous"></script>
     <title>RSVP for Rey's BD</title>
     <style>
         body {
@@ -103,6 +104,52 @@
         .update-link:hover {
             color: #a5045c;
         }
+
+        #rsvp-list{
+            text-decoration: none;
+            color: black;
+            font-size: 2em;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .fa-arrow-left {
+            color: #c2046c;
+            font-size: 2em;
+            font-weight: 700;
+            animation: slideleft 1s ease-in-out infinite;
+        }
+
+        .fa-arrow-right {
+            color: #c2046c;
+            font-size: 2em;
+            font-weight: 700;
+            animation: slideright 1s ease-in-out infinite;
+        }
+
+        @keyframes slideleft {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50%{
+                transform: translate(10px, 0);
+            }
+        }
+
+        @keyframes slideright {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50%{
+                transform: translate(-10px, 0);
+            }
+        }
+
+
     </style>
 </head>
 <body>
@@ -119,6 +166,19 @@
                 <q th:unless="${user.id == post.user.id}">[[${post.message}]]</q>
                 <footer class="by-whom">-[[${post.user.username}]]</footer>
             </blockquote>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <p>
+            <form id="logout" th:action="@{/logout}" method="post">
+            <i class="fas fa-arrow-right"></i>
+            <a id="rsvp-list" class="nav-link" href="javascript:{}" onclick="document.getElementById('logout').submit();">Logout</a>
+            <i class="fas fa-arrow-left"></i>
+            </form>
+
+            </p>
         </div>
     </div>
 </div>

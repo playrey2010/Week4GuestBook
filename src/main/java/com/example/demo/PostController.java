@@ -20,27 +20,13 @@ public class PostController {
     PostRepository postRepository;
 
     @RequestMapping("/")
-    public String index(Model model, Principal principal, @ModelAttribute("post") Post post){
-
-        // passing user information so user id match post-user id
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (!authentication.getPrincipal().toString().equals("anonymousUser")){
-            String username = principal.getName();
-            model.addAttribute("user", userRepository.findByUsername(username));
-        }
-        model.addAttribute("posts", postRepository.findAll());
-        return "index";
-    }
-
-    @RequestMapping("/test")
     public String testingPage(Model model, Principal principal){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!authentication.getPrincipal().toString().equals("anonymousUser")){
             String username = principal.getName();
             User user = userRepository.findByUsername(username);
             if (!user.getPosts().isEmpty()){
-                return "redirect:/";
+                return "redirect:/RsvpList";
             }
         }
         return "test";
@@ -120,7 +106,7 @@ public class PostController {
         String username = principal.getName();
         User user = userRepository.findByUsername(username);
         if (user.getPosts().isEmpty()){
-            return "redirect:/test";
+            return "redirect:/";
         }
         model.addAttribute("user", user);
         model.addAttribute("post", postRepository.findByUser(user));
@@ -147,7 +133,7 @@ public class PostController {
             User user = userRepository.findByUsername(username);
             model.addAttribute("user", user);
         } else {
-            return "redirect:/test";
+            return "redirect:/";
         }
 
         model.addAttribute("posts", postRepository.findAll());
